@@ -86,6 +86,7 @@ angular.module(MODULE_NAME, [])
           checkWhenEnabled = true;
 
           if (scrollEnabled) {
+              checkWhenEnabled = false;
             if (scope.$$phase || $rootScope.$$phase) {
               scope.infiniteScroll();
             } else {
