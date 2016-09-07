@@ -109,17 +109,18 @@ angular.module(MODULE_NAME, [])
         let previous = 0;
 
         function later() {
-          previous = new Date().getTime();
-          $interval.cancel(timeout);
           timeout = null;
+          previous = Date.now();
           return func.call();
         }
 
         function throttled() {
-          const now = new Date().getTime();
+          const now = Date.now();
           const remaining = wait - (now - previous);
           if (remaining <= 0) {
-            $interval.cancel(timeout);
+            if (timeout) {
+                $interval.cancel(timeout);
+            }
             timeout = null;
             previous = now;
             func.call();
